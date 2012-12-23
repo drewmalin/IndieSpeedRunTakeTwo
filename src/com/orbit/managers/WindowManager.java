@@ -315,17 +315,30 @@ public enum WindowManager {
 	}
 	
 	public void createClickListeners() {
+        //--------------------------- Dialogue menu  ---------------------------//
+        windows.get("dialogue").buttons.get("ok").setClickListener(new ClickListener() {
+            public void onClick() {
+                popMenuStack();
+            }
+        });
+
+        if (gui.get("dialogue") != null)
+        gui.get("dialogue").messageBoxes.get(0).setClickListener(new ClickListener() {
+            public void onScroll(int delta) {
+                if (delta > 0) {
+                    gui.get("dialogue").messageBoxes.get(0).moveDown();
+                }
+                else {
+                    gui.get("dialogue").messageBoxes.get(0).moveUp();
+                }
+            }
+        });
 		//---------------------------   Pause menu   ---------------------------//
 		windows.get("pause").buttons.get("resume").setClickListener(new ClickListener() {
-			public void onClick() {
-				popMenuStack();
-			}
-		});
-		windows.get("pause").buttons.get("save").setClickListener(new ClickListener() {
-			public void onClick() {
-				//saveGame();
-			}
-		});
+            public void onClick() {
+                popMenuStack();
+            }
+        });
 		windows.get("pause").buttons.get("quit").setClickListener(new ClickListener() {
 			public void onClick() {
 				System.exit(0);

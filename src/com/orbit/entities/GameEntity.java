@@ -34,8 +34,9 @@ public class GameEntity implements Moveable {
 	final Vector3f rotation = new Vector3f(0, 0, 0);
 	public long haltTime;
 	public long haltDuration;
-	
-	public GameEntity() {
+    public int followingPlayer = 0;
+
+    public GameEntity() {
 		position.set(0, 0, 0);
 		rotation.set(0, 0, 0);
 		lastMovement = new Vector2f(0, 0);
@@ -52,6 +53,11 @@ public class GameEntity implements Moveable {
 	 * top-left corner of the entity as the local origin.
 	 */
 	public void draw() {
+        /*
+        if (this.equals(ResourceManager.MANAGER.playerFocusEntity))
+            System.out.println(position.x + " " + position.y);
+          */
+
 		texture.bind();
 		
 		GL11.glPushMatrix();
@@ -241,7 +247,11 @@ public class GameEntity implements Moveable {
 	public void setRotation(float[] floatArr) {
 		rotation.set(floatArr[0], floatArr[1], floatArr[2]);
 	}
-	
+
+    public void setDirection(float[] floatArr) {
+        direction.set(floatArr[0], floatArr[1], floatArr[2]);
+    }
+
 	@Override
 	public void setPosition(float x, float y, float z) {
 		if (position == null) position.set(x, y, z);
@@ -270,5 +280,4 @@ public class GameEntity implements Moveable {
 	public int getHeight() 			 { return height; }
 	public String getFile() 		 { return file; }
 	public String getAnimationFile() { return animationFile; }
-
 }

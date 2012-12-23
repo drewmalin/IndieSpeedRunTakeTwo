@@ -16,38 +16,38 @@ class Entity(EntityScript):
         self.dirz = z
 
     def onInteract(self):
-        self.data['newMessage'] = "Hi!"
+        self.data['newMessage'] = "Must find that book... where could it be... what was the title again? Oh, hello."
         return self.data
 
     def update(self):
 
         if (self.diry == -1): #going N
-            if (self.y > 5):
+            if (self.y > 66):
                 self.data['deltaY'] = '-1'
             else:
                 self.data['deltaY'] = '0'
                 self.data['deltaX'] = '1'
-                self.data['halt'] = '500000000'
+                self.data['halt'] = '1000000000'
         elif (self.dirx == 1): #going E
-            if (self.x < 200):
+            if (self.x < 288):
                 self.data['deltaX'] = '1'
             else:
                 self.data['deltaX'] = '0';
                 self.data['deltaY'] = '1';
-                self.data['halt'] = '500000000';
+                self.data['halt'] = '1000000000';
         elif (self.diry == 1): #going S
-            if (self.y < 200):
+            if (self.y < 198):
                 self.data['deltaY'] = '1'
             else:
                 self.data['deltaY'] = '0'
                 self.data['deltaX'] = '-1'
-                self.data['halt'] = '500000000';
+                self.data['halt'] = '1000000000';
         elif (self.dirx == -1): #going W
-            if (self.x > 5):
+            if (self.x > 33):
                 self.data['deltaX'] = '-1'
             else:
                 self.data['deltaX'] = '0'
                 self.data['deltaY'] = '-1'
-                self.data['halt'] = '500000000'
+                self.data['halt'] = '1000000000'
 
         return self.data

@@ -62,9 +62,10 @@ public class OrbitGame extends Game {
 		
 		// Load game menus
 		WindowManager.MANAGER.loadMenu("res/menu/pause.xml");
-		WindowManager.MANAGER.loadConsole();
+        WindowManager.MANAGER.loadMenu("res/menu/dialogue.xml");
+        WindowManager.MANAGER.loadConsole();
 		WindowManager.MANAGER.createClickListeners();
-		
+
 		// Load Shaders (must be done after loading of graphicsmanager)
 		ShaderManager.MANAGER.init("res/shaders/orbit.frag", "res/shaders/orbit.vert");
 		

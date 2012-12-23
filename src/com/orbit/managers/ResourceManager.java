@@ -43,6 +43,8 @@ public enum ResourceManager {
 			for (Node el : entityEl.children) {
 				if (el.name.equals("position"))
 					entity.setPosition(el.readFloatArray());
+                else if (el.name.equals("direction"))
+                    entity.setDirection(el.readFloatArray());
 				else if (el.name.equals("width"))
 					entity.setWidth(el.readInt());
 				else if (el.name.equals("height"))

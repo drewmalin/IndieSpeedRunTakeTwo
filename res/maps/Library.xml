@@ -48,4 +48,10 @@
     <entity>
         <file>res/entities/Bot.xml</file>
     </entity>
+    <entity>
+        <file>res/entities/Bot2.xml</file>
+    </entity>
+    <entity>
+        <file>res/entities/Bot3.xml</file>
+    </entity>
 </map>

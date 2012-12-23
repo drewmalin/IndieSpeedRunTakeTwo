@@ -79,8 +79,7 @@ public enum ScriptManager {
 				if (queryScript != null) {
 					System.out.println(queryScript.toString());
 					WindowManager.MANAGER.pushMenuStack("dialogue");
-					return;
-					//WindowManager.MANAGER.gui.get("storyBox").messageBoxes.get(0).replaceMessage(queryScript.toString());
+                    WindowManager.MANAGER.windows.get("dialogue").messageBoxes.get(0).replaceMessage(queryScript.toString());
 				}
 				
 				queryScript = pyDict.get("appendMessage");
@@ -123,6 +122,11 @@ public enum ScriptManager {
 				if (queryScript != null) {
 					ge.setMass(Float.parseFloat(queryScript.toString()));
 				}
+
+                queryScript = pyDict.get("follow");
+                if (queryScript != null) {
+                    ge.followingPlayer = Integer.parseInt(queryScript.toString());
+                }
 			}
 		}		
 	}
@@ -141,6 +145,16 @@ public enum ScriptManager {
 				ScriptManager.MANAGER.run(ge.scriptFile);
 				MANAGER.entityScript.setPosition(ge.position.x, ge.position.y, ge.position.z);
 				MANAGER.entityScript.setDirection(ge.direction.x, ge.direction.y, ge.direction.z);
+
+                MANAGER.entityScript.setFollow(ge.followingPlayer);
+
+                if (ge.followingPlayer == 1) {
+                    MANAGER.entityScript.setTarget(
+                            ResourceManager.MANAGER.playerFocusEntity.position.x,
+                            ResourceManager.MANAGER.playerFocusEntity.position.y,
+                            ResourceManager.MANAGER.playerFocusEntity.position.z);
+                }
+
 				pyDict = MANAGER.entityScript.update();
 				
 				
@@ -184,6 +198,11 @@ public enum ScriptManager {
 						}
 						ge.translateX(delta);
 					}
+
+                    queryScript = pyDict.get("follow");
+                    if (queryScript != null) {
+                        ge.followingPlayer = Integer.parseInt(queryScript.toString());
+                    }
 				}
 			}
 		}
