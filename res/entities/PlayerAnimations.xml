@@ -1,0 +1,52 @@
+<idle_south>
+    <frame>res/textures/player/is_0.png</frame>
+</idle_south>
+<idle_north>
+    <frame>res/textures/player/in_0.png</frame>
+</idle_north>
+<idle_east>
+    <frame>res/textures/player/ie_0.png</frame>
+</idle_east>
+<idle_west>
+    <frame>res/textures/player/iw_0.png</frame>
+</idle_west>
+<walk_north>
+    <speed>50000000</speed>
+    <frame>res/textures/player/n_0.png</frame>
+    <frame>res/textures/player/n_1.png</frame>
+    <frame>res/textures/player/n_2.png</frame>
+    <frame>res/textures/player/n_3.png</frame>
+    <frame>res/textures/player/n_4.png</frame>
+    <frame>res/textures/player/n_5.png</frame>
+    <frame>res/textures/player/n_6.png</frame>
+    <frame>res/textures/player/n_7.png</frame>
+</walk_north>
+<walk_south>
+    <speed>50000000</speed>
+    <frame>res/textures/player/s_0.png</frame>
+    <frame>res/textures/player/s_1.png</frame>
+    <frame>res/textures/player/s_2.png</frame>
+    <frame>res/textures/player/s_3.png</frame>
+    <frame>res/textures/player/s_4.png</frame>
+    <frame>res/textures/player/s_5.png</frame>
+    <frame>res/textures/player/s_6.png</frame>
+    <frame>res/textures/player/s_7.png</frame>
+</walk_south>
+<walk_east>
+    <speed>50000000</speed>
+    <frame>res/textures/player/e_0.png</frame>
+    <frame>res/textures/player/e_1.png</frame>
+    <frame>res/textures/player/e_2.png</frame>
+    <frame>res/textures/player/e_3.png</frame>
+    <frame>res/textures/player/e_4.png</frame>
+    <frame>res/textures/player/e_5.png</frame>
+</walk_east>
+<walk_west>
+    <speed>50000000</speed>
+    <frame>res/textures/player/w_0.png</frame>
+    <frame>res/textures/player/w_1.png</frame>
+    <frame>res/textures/player/w_2.png</frame>
+    <frame>res/textures/player/w_3.png</frame>
+    <frame>res/textures/player/w_4.png</frame>
+    <frame>res/textures/player/w_5.png</frame>
+</walk_west>
