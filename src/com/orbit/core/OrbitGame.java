@@ -50,7 +50,7 @@ public class OrbitGame extends Game {
 
 		// Load Shaders (must be done after loading of graphicsmanager)
 		ShaderManager.MANAGER.init("res/shaders/orbit.frag", "res/shaders/orbit.vert");
-		
+
 		// Load Main character
 		GameEntity player = ResourceManager.MANAGER.loadEntity("res/entities/Player.xml");
 		ResourceManager.MANAGER.setFocusEntity(player);
@@ -67,6 +67,22 @@ public class OrbitGame extends Game {
 		Camera.CAMERA.findPlayer();
 		
 		ScriptManager.MANAGER.warmUp();
+
+        // Put the player at the end of the list. Why? because I said so, that's why.
+        ResourceManager.MANAGER.gameEntities.remove(player);
+        ResourceManager.MANAGER.gameEntities.add(player);
+
+        // Load Sounds
+        ResourceManager.MANAGER.loadSound("res/sound/vglezendloop.wav", true);
+        ResourceManager.MANAGER.loadSound("res/sound/earthQuake_1.wav", false);
+        ResourceManager.MANAGER.loadSound("res/sound/earthQuake_2.wav", false);
+        ResourceManager.MANAGER.loadSound("res/sound/fear_1.wav", false);
+        ResourceManager.MANAGER.loadSound("res/sound/fear_2.wav", false);
+        ResourceManager.MANAGER.loadSound("res/sound/fear_3.wav", false);
+        ResourceManager.MANAGER.loadSound("res/sound/happy_1.wav", false);
+
+        ResourceManager.MANAGER.sound.create();
+        ResourceManager.MANAGER.sound.play("vglezendloop");
 	}
 	
 	private InputListener keyboardListener = new InputListener() {

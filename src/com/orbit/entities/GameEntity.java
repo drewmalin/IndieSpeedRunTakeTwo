@@ -56,8 +56,8 @@ public class GameEntity implements Moveable, Comparable {
 	 */
 	public void draw() {
 
-//        if (this.equals(ResourceManager.MANAGER.playerFocusEntity))
-//            System.out.println(position.x + " " + position.y);
+        if (this.equals(ResourceManager.MANAGER.playerFocusEntity))
+            System.out.println(position.x + " " + position.y);
 
 		texture.bind();
 		

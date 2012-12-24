@@ -156,7 +156,7 @@ public enum GraphicsManager {
 	}
 	
 	public void jitterForDays(int duration) {
-		
+        ResourceManager.MANAGER.sound.play("earthQuake_1");
 		int jitterX, jitterY;
 		Random generator = new Random(System.nanoTime());
 		

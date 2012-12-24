@@ -76,7 +76,8 @@ public enum ScriptManager {
             pyDict = MANAGER.entityScript.onInteract();
 			
 			if (pyDict != null) {
-
+                runReleaseTheKraken(pyDict);
+                runPlaySounds(pyDict);
                 runNewMessage(pyDict);
                 runAppendMessage(pyDict);
                 runDestroy(pyDict, ge);
@@ -108,6 +109,7 @@ public enum ScriptManager {
                 ScriptManager.MANAGER.run(ge.scriptFile);
                 MANAGER.entityScript.setPosition(ge.position.x, ge.position.y, ge.position.z);
                 MANAGER.entityScript.setDirection(ge.direction.x, ge.direction.y, ge.direction.z);
+
                 MANAGER.entityScript.setStage(ge.questStage, 0);
 
                 if (ge.followPlayer)
@@ -146,6 +148,7 @@ public enum ScriptManager {
 
             if (pyDict != null) {
                 runReleaseTheKraken(pyDict);
+                runPlaySounds(pyDict);
                 runDestroy(pyDict, ge);
                 runNewMessage(pyDict);
                 runUpdateStageOther(pyDict);
@@ -274,6 +277,15 @@ public enum ScriptManager {
                 GraphicsManager.MANAGER.jitterForDays(50);
     }
 
+    public void runPlaySounds(PyDictionary pyDict) {
+        PyList pyList = (PyList) pyDict.get("playSounds");
+        if (pyList != null) {
+            for (Object query : pyList) {
+                ResourceManager.MANAGER.sound.play(query.toString());
+            }
+        }
+    }
+
     // General updates for the entity
     public boolean runUpdates(PyDictionary pyDict, GameEntity ge) {
         boolean changeLevel = false;
@@ -301,6 +313,7 @@ public enum ScriptManager {
             else
                 ge.followPlayer = false;
         }
+
         return changeLevel;
     }
 

@@ -1,8 +1,6 @@
 package com.orbit.managers;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.TreeSet;
 
 import com.orbit.core.Camera;
 import com.orbit.core.GameMap;
@@ -10,6 +8,7 @@ import com.orbit.core.MapTile;
 import com.orbit.entities.GameEntity;
 import com.orbit.xml.Node;
 import com.orbit.xml.XMLParser;
+import com.orbit.core.Sound;
 import org.lwjgl.opengl.Display;
 
 
@@ -20,12 +19,18 @@ public enum ResourceManager {
 	public ArrayList<GameEntity> gameEntities;
 	public GameEntity playerFocusEntity;
     public static String queueNextLevel = "";
+    public Sound sound;
 
     ResourceManager() {
 		gameEntities = new ArrayList<GameEntity>();
 		playerFocusEntity = new GameEntity();
+        sound = new Sound();
 	}
-	
+
+    public void loadSound(String file, Boolean loop) {
+        String type = file.substring(file.indexOf(".") + 1).toUpperCase();
+        sound.load(type, file, loop);
+    }
 	/**
 	 * Loads from an external resource file a new GameEntity object for use
 	 * within the game. This method will parse the given XML file and instantiate
@@ -140,7 +145,7 @@ public enum ResourceManager {
 	}*/
 	
 	public void changeLevel(String lvlFile) {
-
+        ResourceManager.MANAGER.sound.pause(0);
         WindowManager.MANAGER.pushMenuStack("loading");
         WindowManager.MANAGER.draw();
         Display.update();
@@ -154,6 +159,7 @@ public enum ResourceManager {
 		loadMap("res/maps/"+lvlFile);
 		Camera.CAMERA.findPlayer();
         WindowManager.MANAGER.popMenuStack();
+        ResourceManager.MANAGER.sound.play(0);
 	}
 	
 	public void setFocusEntity(GameEntity ge) {
