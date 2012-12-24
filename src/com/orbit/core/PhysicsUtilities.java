@@ -147,7 +147,9 @@ public class PhysicsUtilities {
 			(e1MaxY + deltaY >= e2MinY && e1MaxY + deltaY <= e2MaxY)) {
 				if ((e1MinX + deltaX >= e2MinX && e1MinX + deltaX <= e2MaxX) ||
 					(e1MaxX + deltaX >= e2MinX && e1MaxX + deltaX <= e2MaxX)) {
-					//Collision!
+
+                    System.out.println("Collision!");
+                    System.out.println(e1.getFile() + ", " + e2.getFile());
 					ret = true;
 				}
 		}

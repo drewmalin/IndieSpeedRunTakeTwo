@@ -1,9 +1,0 @@
-<entity>
-    <position>32 66 0</position>
-    <direction>0 1 0</direction>
-    <width>30</width>
-    <height>30</height>
-    <lightRadius>0</lightRadius>
-    <animationFile>res/entities/BotAnimations.xml</animationFile>
-    <scriptFile>res/scripts/Bot.py</scriptFile>
-</entity>

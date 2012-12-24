@@ -36,33 +36,15 @@ public class OrbitGame extends Game {
 		// Load input listeners
 		InputManager.MANAGER.setKeyboardListener(keyboardListener);
 		InputManager.MANAGER.setMouseListener(mouseListener);
-		
-		// Create constant GUI
-		/*Window w = WindowManager.MANAGER.createWindow("storyBox", 800, 0).setWidth(350).setHeight(600);
-		w.setColor(new float[] {0, 0, 0, 1});
-		MessageBox mb = new MessageBox(WindowManager.MANAGER, w);
 
-		mb.message = "Mr. and Mrs. Dursley, of number four, Privet Drive, were proud to say that they were perfectly normal, thank you very much. They were the last people you'd expect to be involved in anything strange or mysterious, because they just didn't hold with such nonsense.\n\nMr. Dursley was the director of a firm called Grunnings, which made drills. He was a big, beefy man with hardly any neck, although he did have a very large mustache. Mrs. Dursley was thin and blonde and had nearly twice the usual amount of neck, which came in very useful as she spent so much of her time craning over garden fences, spying on the neighbors. The Dursleys had a small son called Dudley and in their opinion there was no finer boy anywhere.";
-		mb.height = 600;
-		mb.width = 350;
-		mb.x = 800;
-		mb.y = 0;
-		mb.fontName = "Times New Roman";
-		mb.fontSize = 16;
-		mb.setFontColor("white");
-		mb.setColor(new float[] {0, 0, 0, 1});
-		*/
 		// Load GraphicsManager
 		GraphicsManager.MANAGER.setResolution(800, 600);
 		GraphicsManager.MANAGER.create("2D");
-		
-		//WindowManager.MANAGER.gui.get("storyBox").messageBoxes.add(mb);
-		//mb.load();
-		//mb.fixMessage();
-		
+
 		// Load game menus
 		WindowManager.MANAGER.loadMenu("res/menu/pause.xml");
         WindowManager.MANAGER.loadMenu("res/menu/dialogue.xml");
+        WindowManager.MANAGER.loadMenu("res/menu/loading.xml");
         WindowManager.MANAGER.loadConsole();
 		WindowManager.MANAGER.createClickListeners();
 
@@ -81,8 +63,7 @@ public class OrbitGame extends Game {
 		}
 
 		// Load first map
-		//ResourceManager.MANAGER.loadMap("res/maps/Level2.xml");
-		ResourceManager.MANAGER.loadMap("res/maps/Library.xml");
+		ResourceManager.MANAGER.loadMap("res/maps/scene1/Library.xml");
 		Camera.CAMERA.findPlayer();
 		
 		ScriptManager.MANAGER.warmUp();
@@ -107,10 +88,12 @@ public class OrbitGame extends Game {
 					}
 					else if (Keyboard.getEventKey() == Keyboard.KEY_SLASH)
 						WindowManager.MANAGER.pushMenuStack("console");
-					else if (Keyboard.getEventKey() == Keyboard.KEY_SPACE) {
+					else if (Keyboard.getEventKey() == Keyboard.KEY_SPACE)
 						ScriptManager.MANAGER.onInteract(PhysicsUtilities.entityProximity(playerFocusEntity));
-						//GraphicsManager.MANAGER.jitterForDays(50); // JITTER FO DAYS MOFOZ
-					}
+                    else if (Keyboard.getEventKey() == Keyboard.KEY_0)
+                        ResourceManager.MANAGER.changeLevel("scene1/Library.xml");
+                        //GraphicsManager.MANAGER.jitterForDays(50); // JITTER FO DAYS MOFOZ
+
 				}
 			}
 			

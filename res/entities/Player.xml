@@ -1,7 +1,7 @@
 <entity>
     <position>0 0 0</position>
-    <width>30</width>
-    <height>30</height>
+    <width>40</width>
+    <height>40</height>
     <lightRadius>0</lightRadius>
     <animationFile>res/entities/PlayerAnimations.xml</animationFile>
 </entity>

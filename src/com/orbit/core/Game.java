@@ -2,17 +2,14 @@ package com.orbit.core;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.TreeSet;
 
 
+import com.orbit.entities.GameEntity;
+import com.orbit.managers.*;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector3f;
-
-import com.orbit.managers.GraphicsManager;
-import com.orbit.managers.InputManager;
-import com.orbit.managers.NetworkManager;
-import com.orbit.managers.ScriptManager;
-import com.orbit.managers.WindowManager;
 
 public class Game {
 	
@@ -77,13 +74,20 @@ public class Game {
 			
 			InputManager.MANAGER.pollKeyboard();
 			InputManager.MANAGER.pollMouse();
-			
+
 			if (WindowManager.MANAGER.windowStack.size() == 0) 
 				ScriptManager.MANAGER.updateEntities();
-			
-			GraphicsManager.MANAGER.drawGame();			
+
+            GraphicsManager.MANAGER.drawGame();
 			WindowManager.MANAGER.draw();
-			
+
+
+            if (ResourceManager.MANAGER.queueNextLevel != "") {
+                ResourceManager.MANAGER.changeLevel(ResourceManager.MANAGER.queueNextLevel);
+                ResourceManager.MANAGER.queueNextLevel = "";
+            }
+
+
 			Display.update();
 			Display.sync(60);
 		}

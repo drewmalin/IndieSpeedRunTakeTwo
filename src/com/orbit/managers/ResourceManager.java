@@ -1,6 +1,8 @@
 package com.orbit.managers;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.TreeSet;
 
 import com.orbit.core.Camera;
 import com.orbit.core.GameMap;
@@ -8,6 +10,7 @@ import com.orbit.core.MapTile;
 import com.orbit.entities.GameEntity;
 import com.orbit.xml.Node;
 import com.orbit.xml.XMLParser;
+import org.lwjgl.opengl.Display;
 
 
 public enum ResourceManager {
@@ -16,8 +19,9 @@ public enum ResourceManager {
 	
 	public ArrayList<GameEntity> gameEntities;
 	public GameEntity playerFocusEntity;
-	
-	ResourceManager() {
+    public static String queueNextLevel = "";
+
+    ResourceManager() {
 		gameEntities = new ArrayList<GameEntity>();
 		playerFocusEntity = new GameEntity();
 	}
@@ -120,6 +124,10 @@ public enum ResourceManager {
 					for (Node playerNode : el.children) {
 						if (playerNode.name.equals("position"))
 							MANAGER.playerFocusEntity.setPosition(playerNode.readFloatArray());
+                        else if (playerNode.name.equals("width"))
+                            MANAGER.playerFocusEntity.setWidth(playerNode.readInt());
+                        else if (playerNode.name.equals("height"))
+                            MANAGER.playerFocusEntity.setHeight(playerNode.readInt());
 					}
 				}
 			}
@@ -132,8 +140,11 @@ public enum ResourceManager {
 	}*/
 	
 	public void changeLevel(String lvlFile) {
-		
-		GraphicsManager.MANAGER.fadeToBlack();
+
+        WindowManager.MANAGER.pushMenuStack("loading");
+        WindowManager.MANAGER.draw();
+        Display.update();
+        Display.sync(60);
 
 		GameEntity temp = MANAGER.playerFocusEntity;
 		MANAGER.gameEntities.clear();
@@ -142,6 +153,7 @@ public enum ResourceManager {
 		GameMap.MAP.unload();
 		loadMap("res/maps/"+lvlFile);
 		Camera.CAMERA.findPlayer();
+        WindowManager.MANAGER.popMenuStack();
 	}
 	
 	public void setFocusEntity(GameEntity ge) {

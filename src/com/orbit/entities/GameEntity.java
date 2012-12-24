@@ -14,7 +14,7 @@ import com.orbit.managers.ResourceManager;
 import com.orbit.managers.ScriptManager;
 import com.orbit.managers.TextureManager;
 
-public class GameEntity implements Moveable {
+public class GameEntity implements Moveable, Comparable {
 	
 	public int mapLevel = 0;
 	public int width;
@@ -34,7 +34,8 @@ public class GameEntity implements Moveable {
 	final Vector3f rotation = new Vector3f(0, 0, 0);
 	public long haltTime;
 	public long haltDuration;
-    public int followingPlayer = 0;
+    public boolean followPlayer = false;
+    public int questStage = 0;
 
     public GameEntity() {
 		position.set(0, 0, 0);
@@ -47,16 +48,16 @@ public class GameEntity implements Moveable {
 		scriptFile = null;
 		mass = -1;
 	}
-		
+
+
 	/**
 	 * Draws the GameEntity object to the game screen. Uses the 
 	 * top-left corner of the entity as the local origin.
 	 */
 	public void draw() {
-        /*
-        if (this.equals(ResourceManager.MANAGER.playerFocusEntity))
-            System.out.println(position.x + " " + position.y);
-          */
+
+//        if (this.equals(ResourceManager.MANAGER.playerFocusEntity))
+//            System.out.println(position.x + " " + position.y);
 
 		texture.bind();
 		
@@ -102,8 +103,15 @@ public class GameEntity implements Moveable {
 						multiplier *= e.translateY(delta * multiplier);
 					}
 					if (e.scriptFile != null && this == ResourceManager.MANAGER.playerFocusEntity) {
-						ScriptManager.MANAGER.onTouch(e);
-						break;
+						if (ScriptManager.MANAGER.onTouch(e))
+                            break;
+                        /*
+                        if (ScriptManager.MANAGER.onTouch(e)) {
+                            System.out.println("CHANGING LEVEL");
+                            break;
+                        }
+                        */
+                        //break; //Disabled break to test running collision scripts for all entities
 					}
 				}
 			}
@@ -139,8 +147,15 @@ public class GameEntity implements Moveable {
 						multiplier *= e.translateX(delta * multiplier);
 					}
 					if (this == ResourceManager.MANAGER.playerFocusEntity && e.scriptFile != null) {
-						ScriptManager.MANAGER.onTouch(e);
-						break;
+                        if (ScriptManager.MANAGER.onTouch(e))
+                            break;
+                        /*
+                        if (ScriptManager.MANAGER.onTouch(e)) {
+                            System.out.println("CHANGING LEVEL");
+                            break;
+                        }
+                        */
+						//break; //Disabled break to test running collision scripts for all entities
 					}
 				}
 			}
@@ -280,4 +295,12 @@ public class GameEntity implements Moveable {
 	public int getHeight() 			 { return height; }
 	public String getFile() 		 { return file; }
 	public String getAnimationFile() { return animationFile; }
+
+    @Override
+    public int compareTo(Object o) {
+        if (this.position.y > ((GameEntity) o).position.y)
+            return 1;
+        else
+            return -1;
+    }
 }

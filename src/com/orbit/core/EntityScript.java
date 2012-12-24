@@ -4,7 +4,7 @@ import org.python.core.PyDictionary;
 public interface EntityScript {
 	public void setPosition(float x, float y, float z);
 	public void setDirection(float x, float y, float z);
-    public void setFollow(int f);
+    public void setStage(int stage, int dummy);
     public void setTarget(float x, float y, float z);
 
 	public PyDictionary onInteract();

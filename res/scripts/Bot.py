@@ -22,7 +22,7 @@ class Entity(EntityScript):
     def update(self):
 
         if (self.diry == -1): #going N
-            if (self.y > 66):
+            if (self.y > 46):
                 self.data['deltaY'] = '-1'
             else:
                 self.data['deltaY'] = '0'

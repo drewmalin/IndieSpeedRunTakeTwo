@@ -1,6 +1,8 @@
 package com.orbit.managers;
 
 import java.nio.FloatBuffer;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import org.lwjgl.BufferUtils;
@@ -197,7 +199,7 @@ public enum GraphicsManager {
 	public void drawCurrentLevel() {
 		int playerLevel = ResourceManager.MANAGER.playerFocusEntity.mapLevel;
 		ShaderManager.MANAGER.bind();
-		
+
 		for (GameEntity ge : ResourceManager.MANAGER.gameEntities) {
 			if (ge.mapLevel == playerLevel && ge.lightRadius > 0) {
 				ShaderManager.MANAGER.parmData.put((windowWidth/2) + ge.position.x - Camera.CAMERA.position.x + ge.width/2);
@@ -219,7 +221,7 @@ public enum GraphicsManager {
 		}
 		
 	}
-	
+
 	/**
 	 * Draws all elevation levels that are *above* the level that the playerFocusEntity occupies. This
 	 * level will be slightly translated by a factor of its relative distance from the playerFocusEntity's
@@ -277,21 +279,20 @@ public enum GraphicsManager {
 	
 	public void fadeToBlack() {
 		long currentTime = System.currentTimeMillis();
-		
+
 		do {
 
 			lastCheck = System.currentTimeMillis();
 
 			GL11.glColor4f(0f, 0f, 0f, (float)((lastCheck - currentTime) / fadeDuration));
-			
 			GL11.glBegin(GL11.GL_QUADS);
 				GL11.glVertex2f(0, 0);
 				GL11.glVertex2f(GraphicsManager.MANAGER.getWidth(), 0);
 				GL11.glVertex2f(GraphicsManager.MANAGER.getWidth(), GraphicsManager.MANAGER.getHeight());
 				GL11.glVertex2f(0, GraphicsManager.MANAGER.getHeight());
 			GL11.glEnd();
-			
-			Display.update();
+
+            Display.update();
 			Display.sync(60);
 
 		} while (lastCheck - currentTime < fadeDuration);
